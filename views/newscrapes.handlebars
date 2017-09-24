@@ -1,0 +1,17 @@
+{{>navPanel}}
+<h1>Scrape Complete</h1>
+  
+<div class="row">
+  <div class="container">
+    {{#each result}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><a href = "{{this.link}}">{{this.title}}</a></h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
