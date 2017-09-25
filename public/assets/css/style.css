@@ -5,3 +5,28 @@ body {
     -o-background-size: cover;
     background-size: cover;
 }
+
+.articleDisplay{
+    color: black
+}
+
+.modal-content{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#noteForm{
+    margin-top: 15px;
+}
+
+.siteTitle {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.spacer {
+    line-height: 300px;
+    text-align: center;
+    
+}
+

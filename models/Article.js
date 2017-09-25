@@ -19,7 +19,7 @@ var ArticleSchema = new Schema({
         required: true
     },
     // This saves one notes' ObjectID, and refers to the Note model
-    note: {
+    notes: {
         type: Schema.Types.ObjectId,
         ref: "Note"
     }

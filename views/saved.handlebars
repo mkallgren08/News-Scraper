@@ -1,2 +1,61 @@
 {{>navPanel}}
 <h1>Saved Articles</h1>
+
+{{>scrapertitle}}
+<div class="row">
+  <div class="container">
+      <h3>Saved Articles</h3>
+    {{#each results}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#noteModal">Add/View Notes</button>
+            <button class="btn btn-danger" class = "unsaveArticle">Remove Article</button>
+        </div>
+        <div class="panel-body">
+            <h2 ><a href = "https://www.bbc.com{{this.link}}" class = "articleDisplay" target = "_blank">{{this.title}}</a></h2>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{#each notes}}
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <p>Notes</p>
+                        <ul class="messages collection">
+
+                        </ul>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-danger deleteNote" data-id = {{id}}>Delete</button>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        <form name="noteForm" id="noteForm">
+            <input required placeholder="Enter a note here" type="text" name="noteText" id="noteText">
+            <button class="btn green left" type="submit" id="noteButton">
+                Post Note!
+            </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

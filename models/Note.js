@@ -14,7 +14,7 @@ var NoteSchema = new Schema({
         required: true
     },
     // The link is another required string
-    link: {
+    text: {
         type: String,
         required: true
     }

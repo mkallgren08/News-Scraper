@@ -21,8 +21,27 @@
 
         {{!-- Scrape News Button --}}
         <form class="navbar-form navbar-left">
-          <a class="btn-lg btn-primary" href="/scrape">Scrape the News</a>
+          <a class="btn-lg btn-primary" href="/scrape" data-toggle="modal" data-target="#myModal">Scrape the News</a>
         </form>
+
+          <!-- Modal -->
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Scraped some news! Return to homepage for new articles</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn-lg btn-primary" data-dismiss="modal">Return to Home</button>
+                </div>
+              </div>
+            </div>
+          </div>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
