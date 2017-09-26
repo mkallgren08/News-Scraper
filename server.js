@@ -26,6 +26,9 @@ const request = require("request");
 
 // Initialize Express
 const app = express();
+// Set the port to use as a variable.
+const port = process.env.PORT || 3000;
+
 
 // Sets up the main handlebars page (main.hbs) to serve our web apps pages
 // Sets the viewing engine of the app to handlebars
@@ -42,13 +45,7 @@ app.use(bodyParser.urlencoded({
   }));
 app.use(logger("dev"));
 
-// Set the port to use as a variable.
-const port = process.env.PORT || 3000;
 
-// set the app to listen for a server connection
-app.listen(port, function(){
-    console.log('App listening on port ' + port)
-})
 
 
 
@@ -289,3 +286,7 @@ app.get("/newarticles", function(req, res) {
     });
 });
 
+// set the app to listen for a server connection
+app.listen(port, function(){
+    console.log('App listening on port ' + port)
+})
