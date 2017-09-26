@@ -201,6 +201,23 @@ app.post('/articles/:id', function (req, res) {
         }); 
 });
 
+// POST removing the note from the Notes collection
+app.post('/unsaveNote', function (req, res) {
+    // Using our Article model, create a new entry
+    // This effectively passes the result object to the entry (and the title and link)
+    let data = req.body;
+    console.log("req.body: " + JSON.stringify(req.body, null, 2))
+    // console.log("Article pulled: " + NewestArticles.findById(data.articleID))
+    Note.findByIdAndRemove(data.noteID, 
+        function(err,doc) {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(doc + "deleted!")
+            }
+        });
+});
+
 // A GET request to scrape the BBC World website
 app.get("/scrape", function(req, res) {
     NewestArticles.remove({}, function(err, result){

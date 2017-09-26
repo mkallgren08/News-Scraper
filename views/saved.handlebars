@@ -1,14 +1,13 @@
 {{>navPanel}}
-<h1>Saved Articles</h1>
 
 {{>scrapertitle}}
 <div class="row">
   <div class="container">
-      <h3>Saved Articles</h3>
+      <h3 id = 'savedHeader'>Saved Articles</h3>
     {{#each results}}
       <div class="panel panel-default">
         <div class="panel-heading">
-            <button class="btn btn-primary addNoteButton" data-toggle="modal" data-target="#noteModal" data-id= {{id}}>Add/View Notes</button>
+            <button class="btn btn-primary openModal" data-toggle="modal" data-target="#noteModal" data-id= {{id}}>Add/View Notes</button>
             <button class="btn btn-danger unsaveArticle" data-id= {{id}}>Remove Article</button>
         </div>
         <div class="panel-body">
@@ -36,14 +35,13 @@
 
           </div> --}}
           <form name="noteForm" id="noteForm">
-              <input type= "hidden" name = "ArticleId" id= "newNoteArticleId" value = "">
-              <textarea rows="4" cols="50"  placeholder="Enter a note here" type="text" name="noteText" id="noteText">
-              </textarea>
+              <input type= "hidden" name = "ArticleId" class= "newNoteArticleId" value = "">
+              <textarea rows="4" cols="50"  placeholder="Enter a note here" type="text" name="noteText" id="noteText"></textarea>
               <div class="button-wrapper">
-                <button class="btn btn-success" type="submit" id="addNoteButton">
+                <button class="btn btn-success addNoteButton" type="submit">
                     Save Note!
                 </button>
-                <button class="btn btn-danger" id="deleteNoteButton">
+                <button class="btn btn-danger deleteNoteButton" data-id = "">
                     Delete Note!
                 </button>
               </div>
