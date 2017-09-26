@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({
 app.use(logger("dev"));
 
 // Set the port to use as a variable.
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // set the app to listen for a server connection
 app.listen(port, function(){
