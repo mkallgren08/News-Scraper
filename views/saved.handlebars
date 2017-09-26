@@ -8,8 +8,8 @@
     {{#each results}}
       <div class="panel panel-default">
         <div class="panel-heading">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#noteModal">Add/View Notes</button>
-            <button class="btn btn-danger" class = "unsaveArticle">Remove Article</button>
+            <button class="btn btn-primary addNoteButton" data-toggle="modal" data-target="#noteModal" data-id= {{id}}>Add/View Notes</button>
+            <button class="btn btn-danger unsaveArticle" data-id= {{id}}>Remove Article</button>
         </div>
         <div class="panel-body">
             <h2 ><a href = "https://www.bbc.com{{this.link}}" class = "articleDisplay" target = "_blank">{{this.title}}</a></h2>
@@ -24,38 +24,35 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h4 class="modal-title" id="exampleModalLabel">Notes for This Article</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        {{#each notes}}
-            <div class="modal-content">
-                <div class="row">
-                    <div class="col-xs-10">
-                        <p>Notes</p>
-                        <ul class="messages collection">
+        <div class="note-modal-content modal-content">
+          {{!-- <p>Notes</p>
+          <div class="row" id = "notesRow">
 
-                        </ul>
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-danger deleteNote" data-id = {{id}}>Delete</button>
-                    </div>
-                </div>
-            </div>
-        {{/each}}
-        <form name="noteForm" id="noteForm">
-            <input required placeholder="Enter a note here" type="text" name="noteText" id="noteText">
-            <button class="btn green left" type="submit" id="noteButton">
-                Post Note!
-            </button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+          </div> --}}
+          <form name="noteForm" id="noteForm">
+              <input type= "hidden" name = "ArticleId" id= "newNoteArticleId" value = "">
+              <textarea rows="4" cols="50"  placeholder="Enter a note here" type="text" name="noteText" id="noteText">
+              </textarea>
+              <div class="button-wrapper">
+                <button class="btn btn-success" type="submit" id="addNoteButton">
+                    Save Note!
+                </button>
+                <button class="btn btn-danger" id="deleteNoteButton">
+                    Delete Note!
+                </button>
+              </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
   </div>
 </div>

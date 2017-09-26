@@ -8,6 +8,9 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 
+// Set mongoose to leverage built in JavaScript ES6 Promises
+mongoose.Promise = Promise;
+
 // Required Models
 const NewestArticles = require("./models/NewestArticles.js");
 const Article = require("./models/Article.js");
@@ -50,10 +53,11 @@ app.listen(port, function(){
 
 
 // ====================================
-//      Database Setup
+//      Database Setup with Mongoose
 // ====================================
 
 // Database configuration with mongoose
+//mongoose.connect("mongodb://heroku_086slhkf:t96inaqlc3krouapt7t4uvf6rd@ds139984.mlab.com:39984/heroku_086slhkf")
 mongoose.connect('mongodb://localhost/scraper');
 const db = mongoose.connection;
 
@@ -92,6 +96,18 @@ app.get('/', function (req, res) {
       });
 });
 
+app.get("/findArticle/:id", function (req, res){
+    Article.findById(req.params.id)
+        .populate("notes")
+        .exec(function(err, article){
+            if (err){
+                console.log("err " + err)
+            } else {
+            res.json(article)
+            }
+        })
+    });
+
 // A GET request for the saved articles
 app.get('/saved', function (req, res) {
     // Grab every doc in the Article collection
@@ -112,21 +128,23 @@ app.get('/saved', function (req, res) {
               results : result
           }
           console.log("hbsObj for rendering: " + JSON.stringify(hbsObject), null, 2);
+        //   res.send(result);
           res.render("saved", hbsObject);
         }
       });
 });
 
-// Saving the articles to the Articles colelction
+// POST Saving the article to the Articles collection
 app.post('/save', function (req, res) {
     // Using our Article model, create a new entry
     // This effectively passes the result object to the entry (and the title and link)
     let data = req.body;
     console.log("req.body: " + JSON.stringify(req.body, null, 2))
-    console.log("Article pulled: " + NewestArticles.findById(data.articleID))
+    // console.log("Article pulled: " + NewestArticles.findById(data.articleID))
     NewestArticles.findById(data.articleID)
     .then(function(article) {
-        Article.create({ title: article.title, link: article.link })
+        console.log("Article pulled: " + article)
+        Article.create({ title: article.title, link: article.link, originalID: article._id})
             .then(function (newArticle) {
                 console.log(newArticle);
                 res.send('Done.');
@@ -137,6 +155,52 @@ app.post('/save', function (req, res) {
             }); 
     });
 });
+
+// POST removing the article from the Articles colelction
+app.post('/unsave', function (req, res) {
+    // Using our Article model, create a new entry
+    // This effectively passes the result object to the entry (and the title and link)
+    let data = req.body;
+    console.log("req.body: " + JSON.stringify(req.body, null, 2))
+    // console.log("Article pulled: " + NewestArticles.findById(data.articleID))
+    Article.findByIdAndRemove(data.articleID, 
+        function(err,doc) {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(doc + "deleted!")
+            }
+        });
+});
+// Saving the notes to the Notes collection
+app.post('/articles/:id', function (req, res) {
+    // Using our Article model, create a new entry
+    // This effectively passes the result object to the entry (and the title and link)
+    console.log("req.body: " + JSON.stringify(req.body, null, 2))
+    
+    // let note = new Note(req.body);
+
+    Note.create(req.body)
+        .then(function (newNote) {
+        // Find our user and push the new note id into the User's notes array
+        Article.findOneAndUpdate({ "_id": req.params.id }, { "notes": newNote._id }, { new: true })
+        .exec( function(err, newdoc) {
+            // Send any errors to the browser
+            if (err) {
+            res.send(err);
+            }
+                // Or send the newdoc to the browser
+                else {
+                // res.redirect("/saved");
+                res.send("success!")
+                }
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        }); 
+});
+
 // A GET request to scrape the BBC World website
 app.get("/scrape", function(req, res) {
     NewestArticles.remove({}, function(err, result){

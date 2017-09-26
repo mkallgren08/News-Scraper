@@ -8,11 +8,6 @@ const Schema = mongoose.Schema;
 
 // Make the Article Schema here:
 var NoteSchema = new Schema({
-    // The title is a required string
-    title: {
-        type:String,
-        required: true
-    },
     // The link is another required string
     text: {
         type: String,

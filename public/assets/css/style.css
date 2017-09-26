@@ -6,9 +6,18 @@ body {
     background-size: cover;
 }
 
+/* #addNoteButton{
+    display: block;
+    margin-left:5px;
+} */
+
 .articleDisplay{
     color: black
 }
+
+/* #deleteNoteButton{
+    display: inline;
+} */
 
 .modal-content{
     margin-top: 5px;
@@ -17,6 +26,7 @@ body {
 
 #noteForm{
     margin-top: 15px;
+    padding: 5px;
 }
 
 .siteTitle {

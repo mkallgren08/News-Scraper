@@ -11,12 +11,17 @@ var ArticleSchema = new Schema({
     // The title is a required string
     title: {
         type:String,
-        required: true
+        required: true,
     },
     // The link is another required string
     link: {
         type: String,
         required: true
+    },
+    originalID :{
+        type:String,
+        required: true,
+        unique: true
     },
     // This saves one notes' ObjectID, and refers to the Note model
     notes: {
