@@ -8,7 +8,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
             <button class="btn btn-primary openModal" data-toggle="modal" data-target="#noteModal" data-id= {{id}}>Add/View Notes</button>
-            <button class="btn btn-danger unsaveArticle" data-id= {{id}}>Remove Article</button>
+            <button class="btn btn-danger unsaveArticle" data-id= {{id}}>Remove Article<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
         </div>
         <div class="panel-body">
             <h2 ><a href = "https://www.bbc.com{{this.link}}" class = "articleDisplay" target = "_blank">{{this.title}}</a></h2>
@@ -43,6 +43,7 @@
                 </button>
                 <button class="btn  deleteNoteButton" data-id = "">
                     Delete Note!
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
               </div>
 

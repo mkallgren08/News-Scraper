@@ -51,6 +51,10 @@ html{
     font-size: 15px;
 }
 
+.glyphicon{
+    margin-left: 5px;
+}
+
 .modal-content{
     margin-top: 5px;
     margin-bottom: 5px;
