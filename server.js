@@ -229,7 +229,7 @@ app.get("/scrape", function(req, res) {
             // (i: iterator. element: the current element)
         
             // Save an empty result object
-            var result = [];  
+            var result = {};  
             
             $("a.title-link").each(function(i, element) {
         
